@@ -1,0 +1,31 @@
+dataset: HC18
+data_root: data/HC18
+splits_csv: splits/hc18_splits.csv
+task: segmentation_regression
+image_size: 224
+patch_size: 16
+model:
+  d_model: 512
+  ssm_depth: 4
+  vit_depth: 6
+  heads: 8
+  mlp_ratio: 4
+  use_fusion_gate: true
+loss:
+  use_uncertainty_weighting: true
+  entropy_lambda: 0.001
+  use_shape_consistency: true
+optimizer:
+  name: adam
+  lr: 1.0e-4
+  weight_decay: 0.0
+train:
+  epochs: 100
+  batch_size: 8
+  num_workers: 8
+  aug: mild
+eval:
+  calibrate_temperature: false
+seed: 42
+save_dir: runs/hc18
+classes: 2
